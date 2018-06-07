@@ -1,65 +1,83 @@
 function romanNumeral(userNum) {
   var romanWord = "";
-  console.log(userNum);
-  // One's Places
-  if (userNum < 4) {
-    for(i=0; i < userNum; i++) {
-      romanWord = romanWord.concat("I");
-    }
-  } else if (parseInt(userNum) === 4) {
-    romanWord = romanWord.concat("IV");
-  } else if (parseInt(userNum) > 4 && parseInt(userNum) < 9) {
-    romanWord = romanWord.concat("V");
-    for (i=5; i < userNum; i++) {
-      romanWord = romanWord.concat("I");
-    }
-  } else if (parseInt(userNum) === 9) {
-    romanWord = romanWord.concat("IX");
-  }
+  var userArray = userNum.split("");
+  console.log(userArray);
 
-// // Tens Places
-//   if (userNum < 4) {
-//     for(i=0; i < userNum; i++) {
-//       romanWord = romanWord.concat("I");
-//     }
-//   } else if (parseInt(userNum) === 4) {
-//     romanWord = romanWord.concat("IV");
-//   } else if (parseInt(userNum) > 4 && parseInt(userNum) < 9) {
-//     romanWord = romanWord.concat("V");
-//     for (i=5; i < userNum; i++) {
-//       romanWord = romanWord.concat("I");
-//     }
-//   } else if (parseInt(userNum) <= 9) {
-//     romanWord =
-//   }
+  userArray.forEach(function(place)) {
+    var arrayPlaceValue = userArray.length;
+
+    if (arrayPlaceValue === 4) {
+      thousandsFunction(place);
+    } else if (arrayPlaceValue === 3) {
+      hundredsFunction(place);
+    } else if (arrayPlaceValue === 2) {
+      tensFunction(place);
+    } else if (arrayPlaceValue === 1) {
+      onesFunction(place);
+    } else {
+      console.log("Not a number");
+    }
+
+  // Tens Places
+    if (place < 4) {
+      for(i=0; i < place; i++) {
+        romanWord = romanWord.concat("X");
+      }
+    } else if (parseInt(place) === 4) {
+      romanWord = romanWord.concat("XL");
+    } else if (parseInt(place) > 4 && parseInt(place) < 9) {
+      romanWord = romanWord.concat("L");
+      for (i=5; i < place; i++) {
+        romanWord = romanWord.concat("X");
+      }
+    } else if (parseInt(place) === 9) {
+      romanWord = romanWord.concat("XC");
+    }
+
+    // One's Places
+    if (place < 4) {
+      for(i=0; i < place; i++) {
+        romanWord = romanWord.concat("I");
+      }
+    } else if (parseInt(place) === 4) {
+      romanWord = romanWord.concat("IV");
+    } else if (parseInt(place) > 4 && parseInt(place) < 9) {
+      romanWord = romanWord.concat("V");
+      for (i=5; i < place; i++) {
+        romanWord = romanWord.concat("I");
+      }
+    } else if (parseInt(place) === 9) {
+      romanWord = romanWord.concat("IX");
+    }
+  }
 // // Hundreds Places
-//   if (userNum < 4) {
-//     for(i=0; i < userNum; i++) {
+//   if (place < 4) {
+//     for(i=0; i < place; i++) {
 //       romanWord = romanWord.concat("I");
 //     }
-//   } else if (parseInt(userNum) === 4) {
+//   } else if (parseInt(place) === 4) {
 //     romanWord = romanWord.concat("IV");
-//   } else if (parseInt(userNum) > 4 && parseInt(userNum) < 9) {
+//   } else if (parseInt(place) > 4 && parseInt(place) < 9) {
 //     romanWord = romanWord.concat("V");
-//     for (i=5; i < userNum; i++) {
+//     for (i=5; i < place; i++) {
 //       romanWord = romanWord.concat("I");
 //     }
-//   } else if (parseInt(userNum) <= 9) {
+//   } else if (parseInt(place) <= 9) {
 //     romanWord =
 //   }
 // // Thousands Places
-//     if (userNum < 4) {
-//       for(i=0; i < userNum; i++) {
+//     if (place < 4) {
+//       for(i=0; i < place; i++) {
 //         romanWord = romanWord.concat("I");
 //       }
-//     } else if (parseInt(userNum) === 4) {
+//     } else if (parseInt(place) === 4) {
 //       romanWord = romanWord.concat("IV");
-//     } else if (parseInt(userNum) > 4 && parseInt(userNum) < 9) {
+//     } else if (parseInt(place) > 4 && parseInt(place) < 9) {
 //       romanWord = romanWord.concat("V");
-//       for (i=5; i < userNum; i++) {
+//       for (i=5; i < place; i++) {
 //         romanWord = romanWord.concat("I");
 //       }
-//     } else if (parseInt(userNum) <= 9) {
+//     } else if (parseInt(place) <= 9) {
 //       romanWord =
 //     }
   console.log(romanWord);
