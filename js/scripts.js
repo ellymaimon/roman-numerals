@@ -1,94 +1,95 @@
+var romanWord = [];
+
 function romanNumeral(userNum) {
-  var romanWord = "";
+  var finalWord = "";
   var userArray = userNum.split("");
-  console.log(userArray);
+  // console.log(userArray);
+  var arrayPlaceValue = userArray.length;
 
-  userArray.forEach(function(place)) {
-    var arrayPlaceValue = userArray.length;
-
+  userArray.forEach(function(number) {
     if (arrayPlaceValue === 4) {
-      thousandsFunction(place);
+      thousandsFunction(number);
     } else if (arrayPlaceValue === 3) {
-      hundredsFunction(place);
+      hundredsFunction(number);
     } else if (arrayPlaceValue === 2) {
-      tensFunction(place);
+      tensFunction(number);
     } else if (arrayPlaceValue === 1) {
-      onesFunction(place);
-    } else {
-      console.log("Not a number");
+      onesFunction(number);
     }
+    console.log(finalWord, romanWord);
+    arrayPlaceValue--;
+    // console.log(arrayPlaceValue);
 
+  });
+  finalWord = finalWord.concat(romanWord.join(""));
+  console.log(finalWord);
+  return finalWord;
+}
   // Tens Places
-    if (place < 4) {
-      for(i=0; i < place; i++) {
-        romanWord = romanWord.concat("X");
+  function tensFunction(number) {
+    if (number < 4  && number !== 0) {
+      for(i=0; i < number; i++) {
+      // console.log(romanWord);
+      romanWord.push("X");
+      // console.log("called");
       }
-    } else if (parseInt(place) === 4) {
-      romanWord = romanWord.concat("XL");
-    } else if (parseInt(place) > 4 && parseInt(place) < 9) {
-      romanWord = romanWord.concat("L");
-      for (i=5; i < place; i++) {
-        romanWord = romanWord.concat("X");
+    } else if (parseInt(number) === 4) {
+      romanWord.push("XL");
+    } else if (parseInt(number) > 4 && parseInt(number) < 9) {
+      romanWord.push("L");
+      for (i=5; i < number; i++) {
+      romanWord.push("X");
+      // console.log("called2");
       }
-    } else if (parseInt(place) === 9) {
-      romanWord = romanWord.concat("XC");
+    } else if (parseInt(number) === 9) {
+      romanWord.push("LC");
     }
+  };
 
-    // One's Places
+  // One's Places
+  function onesFunction(place) {
     if (place < 4) {
       for(i=0; i < place; i++) {
-        romanWord = romanWord.concat("I");
+      romanWord.push("I");
       }
     } else if (parseInt(place) === 4) {
-      romanWord = romanWord.concat("IV");
+      romanWord.push("IV");
     } else if (parseInt(place) > 4 && parseInt(place) < 9) {
-      romanWord = romanWord.concat("V");
+      romanWord.push("V");
       for (i=5; i < place; i++) {
-        romanWord = romanWord.concat("I");
+      romanWord.push("I");
       }
     } else if (parseInt(place) === 9) {
-      romanWord = romanWord.concat("IX");
+      romanWord.push("IX");
+    }
+  };
+
+// Hundreds Places
+function hundredsFunction(place) {
+  if (place < 4) {
+    for(i=0; i < place; i++) {
+    romanWord.push("C");
+    }
+  } else if (parseInt(place) === 4) {
+    romanWord.push("CD");
+  } else if (parseInt(place) > 4 && parseInt(place) < 9) {
+    romanWord.push("D");
+    for (i=5; i < place; i++) {
+    romanWord.push("C");
+    }
+  } else if (parseInt(place) === 9) {
+    romanWord.push("CM");
+  }
+};
+
+// Thousands Places
+function thousandsFunction(place) {
+  if (place < 4) {
+    for(i=0; i < place; i++) {
+    romanWord.push("M");
     }
   }
-// // Hundreds Places
-//   if (place < 4) {
-//     for(i=0; i < place; i++) {
-//       romanWord = romanWord.concat("I");
-//     }
-//   } else if (parseInt(place) === 4) {
-//     romanWord = romanWord.concat("IV");
-//   } else if (parseInt(place) > 4 && parseInt(place) < 9) {
-//     romanWord = romanWord.concat("V");
-//     for (i=5; i < place; i++) {
-//       romanWord = romanWord.concat("I");
-//     }
-//   } else if (parseInt(place) <= 9) {
-//     romanWord =
-//   }
-// // Thousands Places
-//     if (place < 4) {
-//       for(i=0; i < place; i++) {
-//         romanWord = romanWord.concat("I");
-//       }
-//     } else if (parseInt(place) === 4) {
-//       romanWord = romanWord.concat("IV");
-//     } else if (parseInt(place) > 4 && parseInt(place) < 9) {
-//       romanWord = romanWord.concat("V");
-//       for (i=5; i < place; i++) {
-//         romanWord = romanWord.concat("I");
-//       }
-//     } else if (parseInt(place) <= 9) {
-//       romanWord =
-//     }
-  console.log(romanWord);
-  return romanWord;
-}
-
-
-
-
-
-
+};
 
 $(document).ready(function(){
   $("#roman").submit(function(event){
