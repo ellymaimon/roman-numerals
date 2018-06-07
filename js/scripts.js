@@ -1,92 +1,93 @@
 // Tens Places
-function tensFunction(number) {
+function tensFunction(number, word) {
   if (number < 4  && number !== 0) {
     for(i=0; i < number; i++) {
     // console.log(romanWord);
-    romanWord.push("X");
+    word.push("X");
     // console.log("called");
     }
   } else if (parseInt(number) === 4) {
-    romanWord.push("XL");
+    word.push("XL");
   } else if (parseInt(number) > 4 && parseInt(number) < 9) {
-    romanWord.push("L");
+    word.push("L");
     for (i=5; i < number; i++) {
-    romanWord.push("X");
+    word.push("X");
     // console.log("called2");
     }
   } else if (parseInt(number) === 9) {
-    romanWord.push("LC");
+    word.push("XC");
   }
 };
 
 // One's Places
-function onesFunction(place) {
+function onesFunction(place, word) {
   if (place < 4) {
     for(i=0; i < place; i++) {
-    romanWord.push("I");
+    word.push("I");
     }
   } else if (parseInt(place) === 4) {
-    romanWord.push("IV");
+    word.push("IV");
   } else if (parseInt(place) > 4 && parseInt(place) < 9) {
-    romanWord.push("V");
+    word.push("V");
     for (i=5; i < place; i++) {
-    romanWord.push("I");
+    word.push("I");
     }
   } else if (parseInt(place) === 9) {
-    romanWord.push("IX");
+    word.push("IX");
   }
 };
 
 // Hundreds Places
-function hundredsFunction(place) {
+function hundredsFunction(place, word) {
   if (place < 4) {
     for(i=0; i < place; i++) {
-    romanWord.push("C");
+    word.push("C");
     }
   } else if (parseInt(place) === 4) {
-    romanWord.push("CD");
+    word.push("CD");
   } else if (parseInt(place) > 4 && parseInt(place) < 9) {
-    romanWord.push("D");
+    word.push("D");
     for (i=5; i < place; i++) {
-    romanWord.push("C");
+    word.push("C");
     }
   } else if (parseInt(place) === 9) {
-    romanWord.push("CM");
+    word.push("CM");
   }
 };
 
 // Thousands Places
-function thousandsFunction(place) {
+function thousandsFunction(place, word) {
   if (place < 4) {
     for(i=0; i < place; i++) {
-    romanWord.push("M");
+    word.push("M");
     }
   }
 };
 
-var romanWord = [];
 
 function romanNumeral(userNum) {
   var finalWord = "";
+
   var userArray = userNum.split("");
   // console.log(userArray);
   var arrayPlaceValue = userArray.length;
-
+  var romanWord = [];
   userArray.forEach(function(number) {
     if (arrayPlaceValue === 4) {
-      thousandsFunction(number);
+      thousandsFunction(number, romanWord);
     } else if (arrayPlaceValue === 3) {
-      hundredsFunction(number);
+      hundredsFunction(number, romanWord);
     } else if (arrayPlaceValue === 2) {
-      tensFunction(number);
+      tensFunction(number, romanWord);
     } else if (arrayPlaceValue === 1) {
-      onesFunction(number);
+      onesFunction(number, romanWord);
     }
     console.log(finalWord, romanWord);
     arrayPlaceValue--;
     // console.log(arrayPlaceValue);
   });
   finalWord = finalWord.concat(romanWord.join(""));
+  romanWord = [];
   console.log(finalWord);
   return finalWord;
 }
@@ -98,5 +99,6 @@ $(document).ready(function(){
     var num = $("#number").val();
     var final = romanNumeral(num);
     $("#result").text(final);
+    romanWord = [];
   });
 });
